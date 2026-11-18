@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ទីផ្សារ និងបណ្ដាញពាណិជ្ជកម្មមហាសិរី - Mohaserei System Update Market (MSN)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1b4d3e;
+            --secondary-color: #d4af37;
+            --dark-color: #111827;
+            --light-bg: #f4f6f9;
+            --white: #ffffff;
+            --border-color: #e5e7eb;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kantumruy Pro', sans-serif;
+        }
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-color);
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Sidebar Navigation */
+        aside {
+            width: 280px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .brand-box {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.15);
+        }
+        .brand-box img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary-color);
+        }
+        .brand-box h1 {
+            font-size: 1.05rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        .brand-box p {
+            font-size: 0.75rem;
+            color: #d1d5db;
+        }
+        .nav-menu {
+            list-style: none;
+            padding: 15px 0;
+            flex-grow: 1;
+        }
+        .nav-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 20px;
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        .nav-menu li a:hover, .nav-menu li a.active {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        /* Main Content */
+        main {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: var(--white);
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        header h2 {
+            color: var(--primary-color);
+            font-size: 1.35rem;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        .user-profile i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+        /* Summary Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary-color);
+        }
+        .stat-card h3 {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+        .stat-card .value {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .stat-card small {
+            color: #059669;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        /* Section Cards */
+        .section-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        .section-card h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+        /* Marketplace Grid */
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        }
+        .product-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 15px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-body {
+            padding: 15px;
+        }
+        .product-body p {
+            font-size: 0.88rem;
+            color: #4b5563;
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-top: 10px;
+        }
+        .badge-cat {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 11px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.88rem;
+        }
+        th {
+            background-color: #f8fafc;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+        @media (max-width: 768px) {
+            aside { width: 100%; height: auto; position: relative; }
+            main { margin-left: 0; padding: 15px; }
+            body { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside>
+        <div class="brand-box">
+            <img src="mohaserey.jpg" alt="Mohaserei Logo" onerror="this.src='https://via.placeholder.com/50?text=MSN'">
+            <div>
+                <h1>បណ្ដាញមហាសិរី</h1>
+                <p>Mohaserei Network (MSN)</p>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="moha_serei_system_update_dashboard.html"><i class="fas fa-chart-line"></i> ផ្ទាំងគ្រប់គ្រងជាតិ (Dashboard)</a></li>
+            <li><a href="moha_serei_system_update_registration.html"><i class="fas fa-user-plus"></i> ចុះឈ្មោះសមាជិកបណ្ដាញ</a></li>
+            <li><a href="moha_serei_system_update_member.html"><i class="fas fa-users"></i> បញ្ជីសមាជិកទូទាំងប្រទេស</a></li>
+            <li><a href="moha_serei_system_update_economy.html"><i class="fas fa-coins"></i> កម្រិតសេដ្ឋកិច្ច និងពិន្ទុ (UES)</a></li>
+            <li><a href="#" class="active"><i class="fas fa-store"></i> ទីផ្សារសហគ្រាស (MSN Market)</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <header>
+            <h2>ទីផ្សារ និងបណ្ដាញពាណិជ្ជកម្មសហគ្រាសមហាសិរី (MSN National Marketplace)</h2>
+            <div class="user-profile">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Layer 2 Economic Transaction Network</span>
+            </div>
+        </header>
+
+        <!-- Market Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>ហាងដៃគូសរុប (Total Merchants)</h3>
+                <div class="value">45,200 ហាង</div>
+                <small><i class="fas fa-check-circle"></i> ទូទាំង 25 រាជធានី-ខេត្ត</small>
+            </div>
+            <div class="stat-card">
+                <h3>អ្នកផ្គត់ផ្គង់ និងរោងចក្រ (Suppliers)</h3>
+                <div class="value">1,850 អង្គភាព</div>
+                <small>កសិកម្ម សិប្បកម្ម សហគ្រាស</small>
+            </div>
+            <div class="stat-card">
+                <h3>បរិមាណប្រតិបត្តិការប្រចាំថ្ងៃ</h3>
+                <div class="value">$850,000 / ថ្ងៃ</div>
+                <small><i class="fas fa-arrow-up"></i> កំណើន 14% ក្នុងមួយសប្ដាហ៍</small>
+            </div>
+            <div class="stat-card">
+                <h3>ពិន្ទុ UES កើតចេញពីការទិញ-លក់</h3>
+                <div class="value">12,450,000 ពិន្ទុ</div>
+                <small>កត់ត្រាក្នុង Asset Ledger</small>
+            </div>
+        </div>
+
+        <!-- Featured Products & Services -->
+        <div class="section-card">
+            <h3><i class="fas fa-box-open"></i> ផលិតផល និងសេវាកម្មស្នូលពីបណ្ដាញសហគ្រាស និងកសិករ MSN</h3>
+            <div class="market-grid">
+                <div class="product-card">
+                    <div class="product-header">
+                        <span>ស្រូវអង្ករសហគមន៍ធម្មជាតិ</span>
+                        <span class="badge-cat">កសិកម្ម</span>
+                    </div>
+                    <div class="product-body">
+                        <p><strong>អ្នកផ្គត់ផ្គង់:</strong> សហគមន៍កសិកម្មបាត់ដំបង</p>
+                        <p><strong>ទីតាំង:</strong> ខេត្តបាត់ដំបង</p>
+                        <p>ផ្ដល់ពិន្ទុ UES តាមការទិញ និងគាំទ្រកសិករក្នុងស្រុក។</p>
+                        <div class="product-price">$28.00 / ថุง (50kg)</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <span>ផលិតផលកែច្នៃហัตถกรรม</span>
+                        <span class="badge-cat">សិប្បកម្ម</span>
+                    </div>
+                    <div class="product-body">
+                        <p><strong>អ្នកផ្គត់ផ្គង់:</strong> សិប្បកម្មខេត្តសៀមរាប</p>
+                        <p><strong>ទីតាំង:</strong> ខេត្តសៀមរាប</p>
+                        <p>ស្នាដៃកូនខ្មែរ គុណភាពខ្ពស់ ផ្ដល់ចំណូលដល់សហគមន៍។</p>
+                        <div class="product-price">$15.00 / ឯកតា</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <span>សេវាកម្មដឹកជញ្ជូនផ្ទាល់</span>
+                        <span class="badge-cat">โลจิสติกส์</span>
+                    </div>
+                    <div class="product-body">
+                        <p><strong>អ្នកផ្គត់ផ្គង់:</strong> ភ្នាក់ងារដឹកជញ្ជូន MSN</p>
+                        <p><strong>ទីតាំង:</strong> ទូទាំង 25 រាជធានី-ខេត្ត</p>
+                        <p>បំពេញដោយកម្លាំងពលកម្មសមាជិកប្រភេទទី ១។</p>
+                        <div class="product-price">$1.50 / គីឡូម៉ែត្រ</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <span>កញ្ចប់បច្ចេកវិទ្យា និង POS</span>
+                        <span class="badge-cat">បច្ចេកវិទ្យា</span>
+                    </div>
+                    <div class="product-body">
+                        <p><strong>អ្នកផ្គត់ផ្គង់:</strong> MSN Tech Division</p>
+                        <p><strong>ទីតាំង:</strong> រាជធានីភ្នំពេញ</p>
+                        <p>ប្រព័ន្ធគ្រប់គ្រងតូបលក់ទំនិញ និងហាងដៃគូ។</p>
+                        <div class="product-price">$120.00 / កញ្ចប់</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Merchant Directory Table -->
+        <div class="section-card">
+            <h3><i class="fas fa-store-alt"></i> បញ្ជីហាងដៃគូ និងសហគ្រាសឆ្នើមប្រចាំខេត្ត</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ល.រ</th>
+                            <th>ឈ្មោះហាង / សហគ្រាស</th>
+                            <th>ប្រភេទអាជីវកម្ម</th>
+                            <th>រាជធានី / ខេត្ត</th>
+                            <th>ម្ចាស់អាជីវកម្ម (សមាជិក MSN)</th>
+                            <th>កម្រិតពិន្ទុ UES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>តូបលក់ទំនិញ យាយតា ផ្សារកណ្ដាល</td>
+                            <td>ហាងលក់រាយ</td>
+                            <td>រាជធានីភ្នំពេញ</td>
+                            <td>គឹម ស្រីលក្ខណ៍</td>
+                            <td><strong>4,800 ពិន្ទុ</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>សហគមន៍កសិកម្មបាត់ដំបងមានជ័យ</td>
+                            <td>កសិកម្ម និងផ្គត់ផ្គង់</td>
+                            <td>ខេត្តបាត់ដំបង</td>
+                            <td>ចាន់ ធីតា</td>
+                            <td><strong>165,000 ពិន្ទុ</strong></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>សិប្បកម្មកែច្នៃវត្ថុអនុស្សាវរីយ៍អង្គរ</td>
+                            <td>សិប្បកម្ម</td>
+                            <td>ខេត្តសៀមរាប</td>
+                            <td>ម៉េង វុទ្ធី</td>
+                            <td><strong>58,200 ពិន្ទុ</strong></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>ហាងលក់សម្ភារៈសំណង់ ថាវរៈ</td>
+                            <td>សហគ្រាសពាណិជ្ជកម្ម</td>
+                            <td>ខេត្តកណ្ដាល</td>
+                            <td>លី សុវណ្ណារ៉ា</td>
+                            <td><strong>540,000 ពិន្ទុ</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
